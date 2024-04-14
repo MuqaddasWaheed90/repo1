@@ -101,3 +101,37 @@ var swiper = new Swiper(".reveiw-slider", {
     },
   },
 });
+
+document.querySelector(".login-form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Get form values
+  var email = document.querySelector(".login-form input[type='email']").value;
+  var password = document.querySelector(".login-form input[type='password']").value;
+
+  // Validation checks
+  if (email === "") {
+      alert("Please fill in the email field.");
+      return;
+  } else if (!email.includes("@") || !email.includes(".") || email.indexOf(".") < email.indexOf("@")) {
+      alert("Please enter a valid email address.");
+      return;
+  }
+
+  if (password === "") {
+      alert("Please fill in the password field.");
+      return;
+  } else if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+      return;
+  }
+
+  // If all validations pass, log the values
+  console.log("Email: " + email);
+  console.log("Password: " + password);
+
+  // Here you can send the data to the server using AJAX or any other method
+  // For this example, let's just show an alert
+  alert("Login successful!");
+  window.location.href = "index.html"; // Redirect to dashboard
+});
