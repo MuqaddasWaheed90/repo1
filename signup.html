@@ -64,25 +64,45 @@
   </div>
   
   <script>
-      document.getElementById("form").addEventListener("submit", function(event){
-          event.preventDefault(); // Prevent form submission
-  
-          // Get form values
-          var username = document.getElementById("username").value;
-          var email = document.getElementById("email").value;
-          var password = document.getElementById("password").value;
-  
-          // You can perform further validation here before sending the data
-          // For simplicity, let's just log the values
-          console.log("Username: " + username);
-          console.log("Email: " + email);
-          console.log("Password: " + password);
-  
-          // Here you can send the data to the server using AJAX or any other method
-          // For this example, let's just show an alert
-          alert("Sign up successful!");
-          window.location.href = "index.html"; 
-      });
+     document.getElementById("form").addEventListener("submit", function(event){
+    event.preventDefault(); // Prevent form submission
+
+    // Get form values
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    // Validation checks
+    if (username === "") {
+        alert("Please fill in the username field.");
+        return;
+    }
+
+    if (email === "") {
+        alert("Please fill in the email field.");
+        return;
+    } else if (!email.includes("@")) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    if (password === "") {
+        alert("Please fill in the password field.");
+        return;
+    } else if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+        alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+        return;
+    }
+
+    // If all validations pass, log the values
+    console.log("Username: " + username);
+    console.log("Email: " + email);
+    console.log("Password: " + password);
+
+    // Here you can send the data to the server using AJAX or any other method
+    // For this example, let's just show an alert
+    alert("Sign up successful!");
+    window.location.href = "index.html"; 
   </script>
   
   </body>
